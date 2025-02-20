@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "ESNext",
-    "lib": [],
+    "module": "ES6",
+    "lib": ["ES6"],
     "moduleResolution": "bundler",
     "declaration": true,
     "outDir": "dist",
