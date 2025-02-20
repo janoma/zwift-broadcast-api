@@ -12,7 +12,7 @@ namespace Zwift {
       `${authHost}realms/zwift/protocol/openid-connect/token`
     );
 
-    const request = new Request(url, {
+    const request =  new Request(url, {
       body: new URLSearchParams({
         client_id: clientId,
         client_secret: clientSecret,
