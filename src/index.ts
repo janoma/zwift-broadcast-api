@@ -1,42 +1,40 @@
-namespace Zwift {
-  export async function getZwiftToken({
-    authHost,
-    clientId,
-    clientSecret,
-  }: {
-    authHost: string;
-    clientId: string;
-    clientSecret: string;
-  }) {
-    const url = new URL(
-      `${authHost}realms/zwift/protocol/openid-connect/token`,
-    );
+import { SignInRequestBody, SignInResponse } from "./types";
 
-    const request = new Request(url, {
-      body: new URLSearchParams({
-        client_id: clientId,
-        client_secret: clientSecret,
-        grant_type: "client_credentials",
-      } satisfies SignInRequestBody),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      method: "POST",
-    });
+export async function getZwiftToken({
+  authHost,
+  clientId,
+  clientSecret,
+}: {
+  authHost: string;
+  clientId: string;
+  clientSecret: string;
+}) {
+  const url = new URL(`${authHost}realms/zwift/protocol/openid-connect/token`);
 
-    const response = await fetch(request).then((res: Response) => {
-      if (!res.ok) {
-        throw new Error("Failed to fetch token");
-      }
-      return res.json() as Promise<SignInResponse>;
-    });
+  const request = new Request(url, {
+    body: new URLSearchParams({
+      client_id: clientId,
+      client_secret: clientSecret,
+      grant_type: "client_credentials",
+    } satisfies SignInRequestBody),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    method: "POST",
+  });
 
-    if (response.token_type !== "Bearer") {
-      throw new Error("Invalid token type");
+  const response = await fetch(request).then((res: Response) => {
+    if (!res.ok) {
+      throw new Error("Failed to fetch token");
     }
+    return res.json() as Promise<SignInResponse>;
+  });
 
-    // TODO: return the expiration time too
-    return response.access_token;
+  if (response.token_type !== "Bearer") {
+    throw new Error("Invalid token type");
   }
+
+  // TODO: return the expiration time too
+  return response.access_token;
 }
