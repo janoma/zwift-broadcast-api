@@ -1,5 +1,12 @@
 /** @module zwift-api */
 
+export interface GetAuthServerResponse {
+  /** URL of authentication server. */
+  authHost: string;
+  launcher: string;
+  realm: string;
+}
+
 export interface GetZwiftTokenParams {
   /** URL of uthentication server, with trailing slash included. */
   authHost: string;
@@ -109,6 +116,33 @@ export interface EventPlacementResponse {
   requestTimeEpoch: number;
   /** What does this mean when it's called without subgroup ID? */
   started: boolean;
+}
+
+/**
+ * Fetch the authentication server URL.
+ * @param {string} relayHost - URL of relay server, with trailing slash included.
+ * @returns
+ */
+export async function getAuthServer(
+  relayHost: string,
+): Promise<GetAuthServerResponse> {
+  const url = new URL(`${relayHost}api/auth`);
+
+  const request = new Request(url, {
+    headers: {
+      Accept: "application/json",
+    },
+    method: "GET",
+  });
+
+  const response = fetch(request).then((res: Response) => {
+    if (!res.ok) {
+      throw new Error("Failed to fetch auth server");
+    }
+    return res.json() as Promise<GetAuthServerResponse>;
+  });
+
+  return response;
 }
 
 /**
