@@ -4,6 +4,9 @@
     "source.fixAll.eslint": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
   "typescript.tsdk": "./node_modules/typescript/lib",
   "javascript.suggestionActions.enabled": false
 }
