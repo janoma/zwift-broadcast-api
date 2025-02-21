@@ -1,8 +1,11 @@
 name: Release
 
 on:
-  push:
+  workflow_run:
+    workflows: [Build]
     branches: [main]
+    types:
+      - completed
 
 jobs:
   release:
