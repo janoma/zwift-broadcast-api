@@ -7,4 +7,12 @@ export default [
   { ignores: ["dist", "node_modules", "**/*.js"] },
   pluginJs.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
+  {
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
 ];
