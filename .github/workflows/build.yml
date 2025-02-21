@@ -1,18 +1,13 @@
-name: Release
+name: Build
 
 on:
   push:
     branches: [main]
 
 jobs:
-  release:
-    name: Release
+  check:
+    name: Build
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # to be able to publish a GitHub release
-      issues: write # to be able to comment on released issues
-      pull-requests: write # to be able to comment on released pull requests
-      id-token: write # to enable use of OIDC for npm provenance
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,10 +41,11 @@ jobs:
           path: "./node_modules"
           key: ${{ runner.os }}-node_modules-${{ hashFiles('./pnpm-lock.yaml') }}
 
-      - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
-        run: pnpm audit signatures
+      - name: Lint check
+        run: pnpm lint
 
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: pnpx semantic-release
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Build
+        run: pnpm build
