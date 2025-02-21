@@ -32,22 +32,8 @@ jobs:
           node-version: "22.x"
           cache: "pnpm"
 
-      - name: Restore node_modules
-        uses: actions/cache/restore@v4
-        id: restore-node-modules
-        with:
-          path: "./node_modules"
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('./pnpm-lock.yaml') }}
-
       - name: Install dependencies
-        if: steps.restore-node-modules.outputs.cache-hit != 'true'
         run: pnpm install
-
-      - name: Cache node_modules
-        uses: actions/cache/save@v4
-        with:
-          path: "./node_modules"
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('./pnpm-lock.yaml') }}
 
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
         run: pnpm audit signatures
