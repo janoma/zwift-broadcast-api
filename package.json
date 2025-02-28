@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package",
-  "name": "zwift-api",
+  "name": "zwift-broadcast-api",
   "description": "Fetch data from the Zwift APIs with type information.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
