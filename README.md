@@ -1,4 +1,4 @@
-# Zwift API Library
+# Zwift Broadcast API Library
 
 Type-safe access to Zwift's broadcast APIs.
 
