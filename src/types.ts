@@ -54,11 +54,11 @@ export interface SignInResponse {
 
 export interface Group {
   avgSpeedKmHour: number;
-  /** I've seen this as the string "NaN". When do we get that value? */
+  /** I've seen this as the string "NaN", but I don't know *when* we get that value. */
   avgWattsPerKg: "NaN" | number;
-  /** Is this taken from the front rider in the group, or some average? */
+  /** Not sure where this is measured. Presumably the front rider of the subgroup. */
   distanceInMeters: number;
-  /** What's the unit? Assuming it's seconds at the moment. */
+  /** The unit seems to be seconds. */
   gapToNextGroup: number;
   number: number;
 }
@@ -71,9 +71,9 @@ export interface Location {
 
 export interface RiderPlacement {
   arrivalAtInSeconds: null | number;
-  /** Is this from gun time or from the rider crossing the start line? */
+  /** Not sure if this is from gun time or from the time the rider crossed the start line. */
   completionTimeInSeconds: null | number;
-  /** Can this be null? What do we get for users who haven't set the country? */
+  /** This may be nullable for users who haven't set the country, but I'm not sure. */
   countryCodeAlpha2Code: string;
   /** I've only seen this as null so far, not sure what it is. */
   crossingStartingLineGap: null;
@@ -88,30 +88,30 @@ export interface RiderPlacement {
   groupNumber: number;
   /** For riders without HR monitor, do we get 0 or null? */
   heartRateInBpm: number;
-  /** Can we get the list of jerseys so that we can display the image? */
+  /** Not really useful without a mapping to the jersey image. */
   jerseyHash: number;
   lastName: string;
   liveTimeGapToLeaderInSeconds: number;
   location: Location;
-  /** I assume this is ZID but it comes in a string. Any chance it could be a number instead? */
+  /** This is the ZID (number) but it comes in a string. */
   playerId: string;
   position: number;
   powerInWattsPerKg: number;
   powerOutputInWatts: number;
-  /** Where are these values defined? How does it change after the PU expires? */
+  /** Not sure what the values represent, or how do they change when the PU expires. */
   powerupUsed: number;
   rideOnsCounter: number;
   speedInKmHours: number;
 }
 
 export interface EventPlacementResponse {
-  /** What does this mean when it's called without subgroup ID? */
+  /** Might mean something different when called without subgroup ID. */
   eventStartEpoch: number;
   groups: Group[];
-  /** What does this mean when it's called without subgroup ID? */
+  /** Might mean something different when called without subgroup ID. */
   leaderCompleted: boolean;
   placement: RiderPlacement[];
   requestTimeEpoch: number;
-  /** What does this mean when it's called without subgroup ID? */
+  /** Might mean something different when called without subgroup ID. */
   started: boolean;
 }
