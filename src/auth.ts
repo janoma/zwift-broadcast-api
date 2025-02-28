@@ -8,7 +8,7 @@ import {
 /**
  * Fetch the authentication server URL.
  * @param {string} relayHost - URL of relay server, with trailing slash included.
- * @returns
+ * @returns {GetAuthServerResponse}
  */
 export async function getAuthServer(
   relayHost: string,
