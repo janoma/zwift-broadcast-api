@@ -1,6 +1,10 @@
 import { getAuthServer, getZwiftToken } from "./auth";
-import { getEventPlacement, getEventProgress } from "./event";
-import { GetEventPlacementParams, GetEventProgressParams } from "./types";
+import { getEventPlacement, getEventPoints, getEventProgress } from "./event";
+import {
+  GetEventPlacementParams,
+  GetEventPointsParams,
+  GetEventProgressParams,
+} from "./types";
 
 export class ZwiftBroadcastApi {
   constructor(
@@ -24,6 +28,16 @@ export class ZwiftBroadcastApi {
     params: Omit<GetEventProgressParams, "token" | "relayHost">,
   ) {
     return getEventProgress({
+      ...params,
+      relayHost: this.relayHost,
+      token: this.token,
+    });
+  }
+
+  async getEventPoints(
+    params: Omit<GetEventPointsParams, "token" | "relayHost">,
+  ) {
+    return getEventPoints({
       ...params,
       relayHost: this.relayHost,
       token: this.token,

@@ -2,7 +2,9 @@ import {
   EventPlacementResponse,
   EventProgressResponse,
   GetEventPlacementParams,
+  GetEventPointsParams,
   GetEventProgressParams,
+  PointsResponse,
 } from "./types";
 
 /**
@@ -72,6 +74,33 @@ export async function getEventProgress({
       throw new Error("Failed to fetch event progress");
     }
     return res.json() as Promise<EventProgressResponse>;
+  });
+
+  return response;
+}
+
+export async function getEventPoints({
+  eventId,
+  token,
+  relayHost,
+}: GetEventPointsParams): Promise<PointsResponse> {
+  const url = new URL(
+    `${relayHost}relay/race/events/${eventId.toString()}/points`,
+  );
+
+  const request = new Request(url, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    method: "GET",
+  });
+
+  const response = await fetch(request).then((res: Response) => {
+    if (!res.ok) {
+      throw new Error("Failed to fetch event points");
+    }
+    return res.json() as Promise<PointsResponse>;
   });
 
   return response;

@@ -42,6 +42,13 @@ export interface GetEventProgressParams {
   token: string;
 }
 
+export interface GetEventPointsParams {
+  /** URL of relay server, with trailing slash included. */
+  relayHost: string;
+  eventId: number;
+  token: string;
+}
+
 export interface SignInRequestBody {
   client_id: string;
   client_secret: string;
@@ -146,4 +153,35 @@ export interface Subgroup {
   };
   /** Assuming UNIX epoch time in milliseconds. */
   startDate: number;
+}
+
+export interface SegmentRank {
+  avgHeartRate: number;
+  avgWatts: number;
+  durationInMs: number;
+  /** Not sure what this value is. */
+  endWorldTime: number;
+  eventSubgroupId: number;
+  firstName: string;
+  jerseyHash: number;
+  lap: number;
+  lastName: string;
+  playerId: number;
+  /** Seem to be hardcoded from 10 to 1. */
+  points: number;
+  rank: number;
+  segmentId: number;
+}
+
+export interface SegmentPoints {
+  /** It seems we only get the first 10 riders, and no more. */
+  ranks: SegmentRank[];
+  segmentFemaleName: string;
+  segmentId: number;
+  segmentName: string;
+  segmentType: "KOM" | "SPRINT";
+}
+
+export interface PointsResponse {
+  [key: string]: SegmentPoints[];
 }
