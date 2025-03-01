@@ -13,7 +13,7 @@ export interface GetZwiftTokenParams {
   /** Client secret, provided by Zwift. DO NOT store in checked-in code! */
   clientSecret: string;
   /** @default client_credentials */
-  grantType: string;
+  grantType?: string;
 }
 
 export interface GetEventPlacementParams {
