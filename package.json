@@ -7,7 +7,7 @@
   "author": "Alejandro Mallea <janoma@gmail.com>",
   "license": "MIT",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.2.0",
   "scripts": {
     "build": "webpack --mode=production",
     "typecheck": "tsc --noEmit",

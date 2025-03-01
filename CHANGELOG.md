@@ -1,3 +1,9 @@
+# [1.2.0](https://github.com/janoma/zwift-broadcast-api/compare/v1.1.0...v1.2.0) (2025-03-01)
+
+### Features
+
+- add a convenience class with static initialization ([b5a93db](https://github.com/janoma/zwift-broadcast-api/commit/b5a93dbcdf2dd401d74e080e72680eeb1e270c25))
+
 # [1.1.0](https://github.com/janoma/zwift-api/compare/v1.0.0...v1.1.0) (2025-02-21)
 
 ### Features
