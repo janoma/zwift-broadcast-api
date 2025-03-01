@@ -1,12 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/package",
   "name": "zwift-broadcast-api",
-  "description": "Fetch data from the Zwift APIs with type information.",
+  "description": "Fetch data from the Zwift broadcast APIs with type information.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Alejandro Mallea <janoma@gmail.com>",
   "license": "MIT",
-  "private": true,
   "version": "1.3.0",
   "scripts": {
     "build": "webpack --mode=production",
