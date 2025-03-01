@@ -1,4 +1,9 @@
-import { EventPlacementResponse, GetEventPlacementParams } from "./types";
+import {
+  EventPlacementResponse,
+  EventProgressResponse,
+  GetEventPlacementParams,
+  GetEventProgressParams,
+} from "./types";
 
 /**
  * Get the placement of riders in an event.
@@ -35,6 +40,38 @@ export async function getEventPlacement({
       throw new Error("Failed to fetch event placement");
     }
     return res.json() as Promise<EventPlacementResponse>;
+  });
+
+  return response;
+}
+
+/**
+ * Get the current distance and lap progress for all the subgroups in an event.
+ * @param {GetEventProgressParams}
+ * @returns {EventProgressResponse}
+ */
+export async function getEventProgress({
+  eventId,
+  token,
+  relayHost,
+}: GetEventProgressParams): Promise<EventProgressResponse> {
+  const url = new URL(
+    `${relayHost}relay/race/events/${eventId.toString()}/progress`,
+  );
+
+  const request = new Request(url, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    method: "GET",
+  });
+
+  const response = await fetch(request).then((res: Response) => {
+    if (!res.ok) {
+      throw new Error("Failed to fetch event progress");
+    }
+    return res.json() as Promise<EventProgressResponse>;
   });
 
   return response;

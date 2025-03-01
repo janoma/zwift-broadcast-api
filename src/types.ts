@@ -35,6 +35,13 @@ export interface GetEventPlacementParams {
   token: string;
 }
 
+export interface GetEventProgressParams {
+  /** URL of relay server, with trailing slash included. */
+  relayHost: string;
+  eventId: number;
+  token: string;
+}
+
 export interface SignInRequestBody {
   client_id: string;
   client_secret: string;
@@ -114,4 +121,29 @@ export interface EventPlacementResponse {
   requestTimeEpoch: number;
   /** Might mean something different when called without subgroup ID. */
   started: boolean;
+}
+
+export interface EventProgressResponse {
+  /** Numeric ID but it comes as a string. */
+  id: string;
+  subgroups: Subgroup[];
+}
+
+export interface Subgroup {
+  /** Not sure what the unit is. Probably meters. */
+  distance: {
+    current: number;
+    remaining: number;
+    total: number;
+  };
+  id: number;
+  /** These are likely the only possible values. If not, we should use a string. */
+  label: "A" | "B" | "C" | "D" | "E";
+  lap: {
+    current: number;
+    remaining: number;
+    total: number;
+  };
+  /** Assuming UNIX epoch time in milliseconds. */
+  startDate: number;
 }
