@@ -76,6 +76,10 @@ const response = await getEventPlacement({
 
 Consider refactoring to standardize variable names and types. For example, use only `camelCase` and use `number` for numeric IDs that are returned as strings.
 
+## Learnings
+
+This is my first released package, so please pardon the inconsistencies as I learn my way around workflows. Please open pull requests or issues, or just ping me directly to my email with questions.
+
 ## License
 
 [MIT](./LICENSE)
