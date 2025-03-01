@@ -79,6 +79,12 @@ export async function getEventProgress({
   return response;
 }
 
+/**
+ * Get the FAL-style points in an event.
+ *
+ * @param {GetEventPointsParams}
+ * @returns {PointsResponse}
+ */
 export async function getEventPoints({
   eventId,
   token,

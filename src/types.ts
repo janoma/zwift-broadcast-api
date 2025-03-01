@@ -49,6 +49,15 @@ export interface GetEventPointsParams {
   token: string;
 }
 
+export interface GetPlayerDataParams {
+  /** URL of relay server, with trailing slash included. */
+  relayHost: string;
+  /** Not entirely sure if this changes the outcome. If in doubt, use 1. */
+  world: number;
+  playerId: number;
+  token: string;
+}
+
 export interface SignInRequestBody {
   client_id: string;
   client_secret: string;
@@ -184,4 +193,84 @@ export interface SegmentPoints {
 
 export interface PointsResponse {
   [key: string]: SegmentPoints[];
+}
+
+export interface PlayerState {
+  /** Not sure about the unit for this. */
+  acceleration: number;
+  /** No idea what this is. */
+  animState: number;
+  /** No idea what this is. */
+  asOf: number;
+  /** Not sure what the aux values are. */
+  aux1: number;
+  aux2: number;
+  aux3: number;
+  aux4: number;
+  /**
+   * I've seen either 0 or absurdly large numbers here (thousands).
+   * Not sure if I need to calculate something to obtain the actual value.
+   * It might work in a reasonable range for some riders.
+   */
+  cadence: number;
+  currentEventSubgroupId: number;
+  currentSport: "CYCLING" | "RUNNING";
+  distanceCovered: number;
+  /** Not sure what the unit is or the possible range for this value. */
+  draftSavings: number;
+  elevationClimbedInMeters: number;
+  eventPosition: null | number;
+  /** Total what? */
+  eventTotal: null | number;
+  focusedPlayerId: number;
+  /** Not sure what the possible values are. */
+  heading: number;
+  heartRateInBpm: number;
+  /** Don't really know what this is */
+  lane: number;
+  lap: number;
+  /** Not sure what this is. */
+  lurking: false;
+  playerId: number;
+  /** Assuming Watts here. */
+  powerOutput: number;
+  /** Not sure what the possible values are. */
+  powerupUsed: number;
+  /** Not sure what this is. I've seen the value 0 so I don't know if it's a timestamp. */
+  profileUpdatedAt: number;
+  rideDurationInSeconds: number;
+  /** This value seems to cap at 256. */
+  rideOnsCounter: number;
+  /** Is this a property of the route or the rider? What's the unit? */
+  routeDistance: number;
+  speedInMillimetersPerHour: number;
+  /** Assuming event only. */
+  timeGap: 0;
+  totalDistanceInMeters: number;
+  totalMilliwattHours: number;
+  x: number;
+  y: number;
+  yaw: number;
+  z: number;
+}
+
+export interface PlayerProfile {
+  countryAlpha2Code: string;
+  jerseyHash: number;
+  bikeHash: number;
+  frontWheelHash: number;
+  rearWheelHash: number;
+  maxHr: number;
+  ftp: number;
+  weightInKg: number;
+  heightInCm: number;
+  /** Only values I've seen are "Male" and "Female", but normalize casing for safety. */
+  gender: string;
+  name: string;
+}
+
+export interface PlayerDataResponse {
+  playerState: PlayerState;
+  profile: PlayerProfile;
+  rideOnsCounter: number;
 }
