@@ -7,12 +7,18 @@ import {
 } from "./types";
 
 export class ZwiftBroadcastApi {
+  private authHost: string | undefined;
+
   constructor(
     private token: string,
     private readonly relayHost: string,
     private readonly clientId: string,
     private readonly clientSecret: string,
   ) {}
+
+  setAuthHost = (authHost: string) => {
+    this.authHost = authHost;
+  };
 
   async getEventPlacement(
     params: Omit<GetEventPlacementParams, "token" | "relayHost">,
@@ -45,10 +51,13 @@ export class ZwiftBroadcastApi {
   }
 
   async renewToken() {
-    const { authHost } = await getAuthServer(this.relayHost);
+    if (!this.authHost) {
+      const { authHost } = await getAuthServer(this.relayHost);
+      this.authHost = authHost;
+    }
 
     const tokenResponse = await getZwiftToken({
-      authHost,
+      authHost: this.authHost,
       clientId: this.clientId,
       clientSecret: this.clientSecret,
     });
@@ -74,11 +83,14 @@ export class ZwiftBroadcastApi {
       clientSecret,
     });
 
-    return new ZwiftBroadcastApi(
+    const instance = new ZwiftBroadcastApi(
       tokenResponse.access_token,
       relayHost,
       clientId,
       clientSecret,
     );
+    instance.setAuthHost(authHost);
+
+    return instance;
   };
 }
