@@ -1,3 +1,9 @@
+## [1.3.2](https://github.com/janoma/zwift-broadcast-api/compare/v1.3.1...v1.3.2) (2025-03-01)
+
+### Bug Fixes
+
+- use default grant type in class ([2bac86b](https://github.com/janoma/zwift-broadcast-api/commit/2bac86b1a309f1a5a2bd6def69f8b3cc69f41764))
+
 ## [1.3.1](https://github.com/janoma/zwift-broadcast-api/compare/v1.3.0...v1.3.1) (2025-03-01)
 
 ### Bug Fixes
