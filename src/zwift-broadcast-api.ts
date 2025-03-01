@@ -4,16 +4,33 @@ import { GetEventPlacementParams } from "./types";
 
 export class ZwiftBroadcastApi {
   constructor(
+    private token: string,
     private readonly relayHost: string,
-    private readonly token: string,
+    private readonly clientId: string,
+    private readonly clientSecret: string,
   ) {}
 
-  async getEventPlacement(params: GetEventPlacementParams) {
+  async getEventPlacement(
+    params: Omit<GetEventPlacementParams, "token" | "relayHost">,
+  ) {
     return getEventPlacement({
       ...params,
       relayHost: this.relayHost,
       token: this.token,
     });
+  }
+
+  async renewToken() {
+    const { authHost } = await getAuthServer(this.relayHost);
+
+    const tokenResponse = await getZwiftToken({
+      authHost,
+      clientId: this.clientId,
+      clientSecret: this.clientSecret,
+      grantType: "client_credentials",
+    });
+
+    this.token = tokenResponse.access_token;
   }
 
   static init = async ({
@@ -26,12 +43,19 @@ export class ZwiftBroadcastApi {
     clientSecret: string;
   }) => {
     const { authHost } = await getAuthServer(relayHost);
+
     const tokenResponse = await getZwiftToken({
       authHost,
       clientId,
       clientSecret,
       grantType: "client_credentials",
     });
-    return new ZwiftBroadcastApi(relayHost, tokenResponse.access_token);
+
+    return new ZwiftBroadcastApi(
+      tokenResponse.access_token,
+      relayHost,
+      clientId,
+      clientSecret,
+    );
   };
 }
