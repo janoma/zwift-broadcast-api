@@ -51,7 +51,6 @@ export class ZwiftBroadcastApi {
       authHost,
       clientId: this.clientId,
       clientSecret: this.clientSecret,
-      grantType: "client_credentials",
     });
 
     this.token = tokenResponse.access_token;
@@ -73,7 +72,6 @@ export class ZwiftBroadcastApi {
       authHost,
       clientId,
       clientSecret,
-      grantType: "client_credentials",
     });
 
     return new ZwiftBroadcastApi(
