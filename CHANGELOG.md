@@ -1,3 +1,12 @@
+# [1.3.0](https://github.com/janoma/zwift-broadcast-api/compare/v1.2.0...v1.3.0) (2025-03-01)
+
+### Features
+
+- add event points api ([f5761e9](https://github.com/janoma/zwift-broadcast-api/commit/f5761e9d2a5a3153abed5073dff9ade26ea85834))
+- add event progress api ([529a8e2](https://github.com/janoma/zwift-broadcast-api/commit/529a8e29f73fe936f9356bfed6d71cf2b28244a4))
+- add function to renew token in class ([25cfefc](https://github.com/janoma/zwift-broadcast-api/commit/25cfefc52f943ce8ae592ccfc4f5bcbd5d6088af))
+- add player data api ([923ef18](https://github.com/janoma/zwift-broadcast-api/commit/923ef18e8c586b44a408d4b3d1939a62c6d681ac))
+
 # [1.2.0](https://github.com/janoma/zwift-broadcast-api/compare/v1.1.0...v1.2.0) (2025-03-01)
 
 ### Features
