@@ -1,3 +1,9 @@
+## [1.3.1](https://github.com/janoma/zwift-broadcast-api/compare/v1.3.0...v1.3.1) (2025-03-01)
+
+### Bug Fixes
+
+- make grant type optional ([0e3652f](https://github.com/janoma/zwift-broadcast-api/commit/0e3652fd192eebfaa875d64d953f69b1e8782667))
+
 # [1.3.0](https://github.com/janoma/zwift-broadcast-api/compare/v1.2.0...v1.3.0) (2025-03-01)
 
 ### Features
