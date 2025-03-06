@@ -106,7 +106,7 @@ export interface RiderPlacement {
    *   2. The pen banner
    *   3. The start line
    */
-  distanceInMeters: number;
+  distanceInMeters: number | null;
   firstName: string;
   groupNumber: number;
   /** For riders without HR monitor, do we get 0 or null? */
@@ -119,7 +119,7 @@ export interface RiderPlacement {
   /** This is the ZID (number) but it comes in a string. */
   playerId: string;
   position: number;
-  powerInWattsPerKg: number;
+  powerInWattsPerKg: number | "NaN";
   powerOutputInWatts: number;
   /** Not sure what the values represent, or how do they change when the PU expires. */
   powerupUsed: number;
