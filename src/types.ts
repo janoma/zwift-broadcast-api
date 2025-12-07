@@ -5,6 +5,12 @@ export interface GetAuthServerResponse {
   realm: string;
 }
 
+interface HostParams {
+  /** URL of relay server, with trailing slash included. */
+  relayHost: string;
+  token: string;
+}
+
 export interface GetZwiftTokenParams {
   /** URL of uthentication server, with trailing slash included. */
   authHost: string;
@@ -16,7 +22,7 @@ export interface GetZwiftTokenParams {
   grantType?: string;
 }
 
-export interface GetEventPlacementParams {
+export interface GetEventPlacementParams extends HostParams {
   /**
    * Minimum position to fetch.
    * @default 1
@@ -27,35 +33,23 @@ export interface GetEventPlacementParams {
    * @default 40
    */
   to: number;
-  /** URL of relay server, with trailing slash included. */
-  relayHost: string;
   eventId: number;
   /** If present, fetch placement for this subgroup only. Strongly recommended. */
   subgroupId?: number;
-  token: string;
 }
 
-export interface GetEventProgressParams {
-  /** URL of relay server, with trailing slash included. */
-  relayHost: string;
+export interface GetEventProgressParams extends HostParams {
   eventId: number;
-  token: string;
 }
 
-export interface GetEventPointsParams {
-  /** URL of relay server, with trailing slash included. */
-  relayHost: string;
+export interface GetEventPointsParams extends HostParams {
   eventId: number;
-  token: string;
 }
 
-export interface GetPlayerDataParams {
-  /** URL of relay server, with trailing slash included. */
-  relayHost: string;
+export interface GetPlayerDataParams extends HostParams {
   /** Not entirely sure if this changes the outcome. If in doubt, use 1. */
   world: number;
   playerId: number;
-  token: string;
 }
 
 export interface SignInRequestBody {
