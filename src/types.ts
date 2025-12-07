@@ -44,6 +44,22 @@ export interface GetEventProgressParams extends HostParams {
 
 export interface GetEventPointsParams extends HostParams {
   eventId: number;
+  lap?: number;
+  /**
+   * If present, it will fetch as many positions as the array length.
+   *
+   * The first position will get as many points as the first element in the array,
+   * and so on until the n-th position, where n is the length of the array.
+   *
+   * If absent, the API defaults to 10 positions with points going from 10 to 1.
+   *
+   * To fetch all riders, it is recommended to pass an array longer than the number
+   * of riders in the event, filled with the value 0. In the response, the rank is present
+   * anyway, so any calculation for points can be done outside of this API call.
+   */
+  pointsSchema?: number[];
+  /** If present, fetch points for this segment only. */
+  segmentId?: bigint;
 }
 
 export interface GetPlayerDataParams extends HostParams {

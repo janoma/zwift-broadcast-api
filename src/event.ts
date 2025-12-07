@@ -87,12 +87,29 @@ export async function getEventProgress({
  */
 export async function getEventPoints({
   eventId,
+  lap,
+  pointsSchema,
   token,
+  segmentId,
   relayHost,
 }: GetEventPointsParams): Promise<PointsResponse> {
   const url = new URL(
     `${relayHost}relay/race/events/${eventId.toString()}/points`,
   );
+
+  if (lap) {
+    url.searchParams.append("lap", lap.toString());
+  }
+
+  if (pointsSchema) {
+    // Add the schema both for sprints and KOMs
+    url.searchParams.append("sprintPoints", pointsSchema.map(String).join(","));
+    url.searchParams.append("komPoints", pointsSchema.map(String).join(","));
+  }
+
+  if (segmentId) {
+    url.searchParams.append("segmentId", segmentId.toString());
+  }
 
   const request = new Request(url, {
     headers: {
